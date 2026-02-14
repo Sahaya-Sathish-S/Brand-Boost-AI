@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Photo Maker Studio - BrandBoost AI</title><link rel="stylesheet" href="/styles.css"/></head>
+<body><main class="main form-page"><div class="toolbar"><button class="icon-btn" onclick="location.href='/media.html'">⬅</button><button class="icon-btn" onclick="location.href='/gallery.html'">🖼️</button></div>
+<div class="brand-name">BrandBoost AI</div><div class="welcome-title">Photo Maker Studio</div>
+<p class="small">Enter company details and generate a social media-ready poster with selected AI/image tools.</p>
+<div class="card" style="cursor:default;">
+  <h3>Company Information</h3>
+  <div class="panel-grid" style="grid-template-columns:1fr 1fr; margin-top:10px;">
+    <input id="companyName" placeholder="Company Name"/>
+    <input id="industry" placeholder="Industry / Category"/>
+    <input id="product" placeholder="Product / Service"/>
+    <input id="offer" placeholder="Offer / Discount"/>
+    <input id="audience" placeholder="Target Audience"/>
+    <input id="contact" placeholder="Contact / Website"/>
+  </div>
+  <textarea id="brief" rows="3" placeholder="Campaign brief (goal, style, brand colors, tone)"></textarea>
+
+  <h4>Image Source / AI Tool</h4>
+  <div class="panel-grid" style="grid-template-columns:1fr 1fr; margin-top:8px;">
+    <select id="sourceTool">
+      <option>Google Images</option>
+      <option>Unsplash</option>
+      <option>Pexels</option>
+      <option>AI Generated (Diffusion)</option>
+    </select>
+    <select id="aiStyle">
+      <option>Modern Premium</option>
+      <option>Luxury Gold</option>
+      <option>Neon Bold</option>
+      <option>Minimal Corporate</option>
+    </select>
+  </div>
+
+  <h4>Theme Selection</h4>
+  <div class="theme-selector" id="themeSelector"></div>
+  <button class="glow-btn butterfly" id="generatePosterBtn" style="max-width:220px">Generate Poster</button>
+  <div id="posterOutput" class="result-card hidden"></div>
+</div>
+<div class="footer">Poster AI Workbench • By Sathish</div>
+</main>
+<script src="/photo-maker.js"></script>
+</body></html>

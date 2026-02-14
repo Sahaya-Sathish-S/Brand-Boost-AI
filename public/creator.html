@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Creator - BrandBoost AI</title><link rel="stylesheet" href="/styles.css"/></head>
+<body><main class="main form-page"><div class="toolbar"><button class="icon-btn" onclick="location.href='/media.html'">⬅</button><button class="icon-btn" onclick="location.href='/gallery.html'">🖼️</button></div>
+<div class="brand-name">BrandBoost AI</div><div class="welcome-title" id="pageTitle">Create</div>
+
+<div class="card" style="cursor:default">
+  <h3>Campaign Input</h3>
+  <div class="panel-grid" style="grid-template-columns:1fr 1fr">
+    <input id="companyName" placeholder="Company Name"/>
+    <input id="category" placeholder="Category"/>
+    <input id="productService" placeholder="Product/Service"/>
+    <input id="offer" placeholder="Offer"/>
+    <input id="address" placeholder="Address"/>
+    <input id="contact" placeholder="Contact"/>
+  </div>
+  <textarea id="topic" rows="3" placeholder="Topic / Campaign brief"></textarea>
+
+  <div id="videoOptions" class="hidden">
+    <h4>Video Style Settings</h4>
+    <div class="panel-grid" style="grid-template-columns:1fr 1fr">
+      <select id="animationType">
+        <option>Slide Animation</option><option>Zoom Cut</option><option>Cinematic Motion</option><option>Minimal Smooth</option>
+      </select>
+      <select id="videoTone">
+        <option>Professional</option><option>Energetic</option><option>Luxury</option><option>Youth Viral</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="adOptions" class="hidden">
+    <h4>Ad Maker Inputs</h4>
+    <div class="panel-grid" style="grid-template-columns:1fr 1fr">
+      <input id="platform" placeholder="Ad Platform (Instagram/YouTube/Google)"/>
+      <input id="budget" placeholder="Budget"/>
+      <input id="audience" placeholder="Target audience"/>
+      <input id="cta" placeholder="CTA (Buy now / DM / Call)"/>
+    </div>
+  </div>
+
+  <div id="captionOptions" class="hidden">
+    <h4>Description + Title Inputs</h4>
+    <div class="panel-grid" style="grid-template-columns:1fr 1fr">
+      <input id="postType" placeholder="Post Type (Reel, Post, Story, Blog)"/>
+      <input id="keyword" placeholder="Main Keyword"/>
+    </div>
+    <textarea id="aboutTopic" rows="2" placeholder="What is this post/video about?"></textarea>
+  </div>
+
+  <h4>Select Theme / Background</h4>
+  <div class="theme-selector" id="themeSelector"></div>
+  <button class="glow-btn butterfly" id="submitBtn" style="max-width:260px">Generate Output</button>
+
+  <div class="result-card hidden" id="result"></div>
+</div>
+<div class="footer">Creative Campaign Generator • By Sathish</div>
+</main>
+<script src="/creator.js"></script>
+</body></html>

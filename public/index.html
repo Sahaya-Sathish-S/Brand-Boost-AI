@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BrandBoost AI</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="loading-overlay" id="loader">
+    <div class="loader-box">
+      <div class="logo">↗</div>
+      <h2>Loading BrandBoost AI...</h2>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <h2>Welcome to Marketing</h2>
+      <button class="glow-btn butterfly" id="newChatBtn">New Chat</button>
+      <button class="glow-btn butterfly" onclick="location.href='/media.html'">Photo / Video Maker</button>
+      <button class="glow-btn butterfly" onclick="location.href='/analytics.html'">Business Analytics</button>
+      <button class="glow-btn" id="clearChatBtn">Clear Chat</button>
+      <div class="top-note">Previous Chats</div>
+      <div class="history-list" id="chatHistory"></div>
+    </aside>
+
+    <main class="main">
+      <div class="toolbar">
+        <button class="icon-btn" title="Google Login" id="loginBtn">👤</button>
+        <button class="icon-btn" title="All options" id="menuBtn">☰</button>
+        <button class="icon-btn" title="Gallery" onclick="location.href='/gallery.html'">🖼️</button>
+      </div>
+
+      <div class="brand-name">BrandBoost AI</div>
+      <div class="welcome-title">Welcome to Chat</div>
+
+      <div class="chat-layout">
+        <div class="chat-box" id="chatBox"></div>
+        <div class="chat-input-row">
+          <input id="messageInput" placeholder="Enter message..." />
+          <input id="mediaInput" type="file" accept="image/*,video/*" class="hidden" />
+          <button class="icon-btn" id="uploadBtn" title="Upload media">📎</button>
+          <button class="icon-btn" id="sendBtn" title="Send">➤</button>
+          <button class="icon-btn" id="saveProfileBtn" title="Save profile">💾</button>
+        </div>
+      </div>
+      <div class="footer">Business Chat & Creation Engine • By Sathish</div>
+    </main>
+  </div>
+
+  <script src="/main.js"></script>
+</body>
+</html>

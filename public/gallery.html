@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Gallery - BrandBoost AI</title><link rel="stylesheet" href="/styles.css"/></head>
+<body><main class="main" style="min-height:100vh"><div class="toolbar"><button class="icon-btn" onclick="location.href='/'">🏠</button></div>
+<div class="brand-name">BrandBoost AI</div><div class="welcome-title">Gallery</div><div id="gallery" class="panel-grid"></div></main>
+<script>
+(async ()=>{
+  const items = await fetch('/api/gallery').then(r=>r.json());
+  const root = document.getElementById('gallery');
+  if (!items.length) root.innerHTML = '<p class="small">No generated photos/videos yet.</p>';
+  items.forEach(item=>{
+    const card = document.createElement('div'); card.className='card';
+    card.innerHTML = `<h3>${item.title}</h3><p class='small'>${item.theme || ''}</p>${item.type==='video' ? `<video class='media' src='${item.media_url}' controls></video>` : `<img class='media' src='${item.media_url}'/>`}`;
+    root.appendChild(card);
+  });
+})();
+</script></body></html>
