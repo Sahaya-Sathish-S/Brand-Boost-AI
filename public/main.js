@@ -3,6 +3,7 @@ setTimeout(() => loader.classList.add('hidden'), 900);
 
 const chatBox = document.getElementById('chatBox');
 const chatHistory = document.getElementById('chatHistory');
+const showHistoryBtn = document.getElementById('showHistoryBtn');
 const messageInput = document.getElementById('messageInput');
 const mediaInput = document.getElementById('mediaInput');
 const uploadBtn = document.getElementById('uploadBtn');
@@ -14,7 +15,13 @@ const saveProfileBtn = document.getElementById('saveProfileBtn');
 let currentChatId = null;
 let pendingMedia = null;
 
+function clearEmptyState() {
+  const empty = chatBox.querySelector('.chat-empty');
+  if (empty) empty.remove();
+}
+
 function addMsg(role, content) {
+  clearEmptyState();
   const div = document.createElement('div');
   div.className = `message ${role}`;
   div.textContent = content;
@@ -23,6 +30,7 @@ function addMsg(role, content) {
 }
 
 function addMediaPreview(file) {
+  clearEmptyState();
   const wrapper = document.createElement('div');
   wrapper.className = 'message user';
   const caption = document.createElement('div');
@@ -63,6 +71,10 @@ async function openChat(chatId) {
   currentChatId = chatId;
   chatBox.innerHTML = '';
   const messages = await fetch(`/api/chats/${chatId}/messages`).then(r => r.json());
+  if (!messages.length) {
+    chatBox.innerHTML = '<div class="chat-empty">No messages yet. Start the conversation!</div>';
+    return;
+  }
   messages.forEach(msg => addMsg(msg.role, msg.content));
 }
 
@@ -76,10 +88,7 @@ async function sendMessage() {
   const content = messageInput.value.trim();
   if (!content || !currentChatId) return;
 
-  const finalContent = pendingMedia
-    ? `${content}\n[Media attached: ${pendingMedia.name}]`
-    : content;
-
+  const finalContent = pendingMedia ? `${content}\n[Media attached: ${pendingMedia.name}]` : content;
   addMsg('user', finalContent);
   messageInput.value = '';
 
@@ -92,22 +101,21 @@ async function sendMessage() {
   mediaInput.value = '';
 }
 
-newChatBtn.onclick = async () => createNewChat();
-
+newChatBtn.onclick = createNewChat;
 clearChatBtn.onclick = async () => {
   if (!currentChatId) return;
   await fetch(`/api/chats/${currentChatId}/messages`, { method: 'DELETE' });
-  chatBox.innerHTML = '';
+  chatBox.innerHTML = '<div class="chat-empty">No messages yet. Start the conversation!</div>';
   pendingMedia = null;
   mediaInput.value = '';
 };
 
+showHistoryBtn.onclick = () => chatHistory.classList.toggle('hidden');
+
 saveProfileBtn.onclick = async () => {
   const name = prompt('Your name:') || '';
   const business = prompt('Your business name/type:') || '';
-  await fetch('/api/profile', {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, business })
-  });
+  await fetch('/api/profile', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, business }) });
   alert('Profile saved.');
 };
 
@@ -117,12 +125,10 @@ mediaInput.onchange = () => {
   if (!file) return;
   pendingMedia = file;
   addMediaPreview(file);
-  addMsg('assistant', 'Nice media upload. I can now suggest social marketing strategy, captions, ad hooks, and posting plan for this media.');
+  addMsg('assistant', 'Great upload! I can now suggest poster/reel strategy, captions, and ad hooks for this media.');
 };
 
-messageInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') sendMessage();
-});
+messageInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
 sendBtn.onclick = sendMessage;
 
 loadChats();

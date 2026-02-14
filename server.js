@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+fs.mkdirSync(path.join(__dirname, 'data'), { recursive: true });
 const db = new sqlite3.Database(path.join(__dirname, 'data', 'brandboost.db'));
 
 app.use(express.json({ limit: '2mb' }));

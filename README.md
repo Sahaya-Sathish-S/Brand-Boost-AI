@@ -1,31 +1,26 @@
 # BrandBoost AI
 
-Full-stack prototype for a business-focused social marketing assistant with polished UI.
+Business-focused social marketing assistant with chat, media creation, analytics, and gallery.
 
-## Features
-- New refreshed gradient background and glowing professional interface
-- Main chatbot page with:
-  - New Chat + saved history
-  - Clear chat
-  - Enter message flow
-  - Media upload in chat (image/video preview)
-- Photo/Video Maker suite:
-  - Dedicated **Photo Maker Studio** page with company info input + poster generation
-  - Shopping web creator contact page
-  - Photo poster maker with theme selection
-  - Video maker with theme + animation/tone selection
-  - Ad maker with platform/audience/CTA inputs
-  - Description + title maker with keyword/topic inputs
-  - Source tool selector (Google/Unsplash/Pexels/AI) for photo workflow
-- Output preview with download/share
-- Gallery of generated media
-- Business analytics dashboard with input fields, KPIs, pie and bar charts
-- Footer branding: **By Sathish**
-- SQLite persistence for profiles, chats/messages, and generated items
+## Highlights
+- Professional **light dashboard UI** with left navigation + top bar
+- Branded loading screens across core pages
+- Chat page with:
+  - New chat, clear chat, show history
+  - Media upload in chatbot
+- Photo/Video maker hub cards with icons and quick actions
+- Dedicated **Photo Maker Studio** with:
+  - Company details input
+  - Theme selection flow
+  - Poster generation + download/share
+- Creator workflows for video/ad/caption
+- Business analytics with KPI cards + pie/bar charts
+- Gallery for generated outputs
+- Footer branding: **© 2026 Built with ❤️ using Sathish**
 
 ## Run
 ```bash
 npm install
 npm start
 ```
-Open: `http://localhost:3000`
+Open `http://localhost:3000`.
