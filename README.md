@@ -1,26 +1,26 @@
-# BrandBoost AI
+# BrandBoost AI (HTML/CSS/JavaScript Only)
 
-Business-focused social marketing assistant with chat, media creation, analytics, and gallery.
+This version is fully frontend-only and does **not require Node.js/npm** to use.
 
-## Highlights
-- Professional **light dashboard UI** with left navigation + top bar
-- Branded loading screens across core pages
-- Chat page with:
-  - New chat, clear chat, show history
-  - Media upload in chatbot
-- Photo/Video maker hub cards with icons and quick actions
-- Dedicated **Photo Maker Studio** with:
-  - Company details input
-  - Theme selection flow
-  - Poster generation + download/share
-- Creator workflows for video/ad/caption
-- Business analytics with KPI cards + pie/bar charts
-- Gallery for generated outputs
-- Footer branding: **© 2026 Built with ❤️ using Sathish**
+## Run (No npm needed)
+Option 1: Open directly
+- Open `public/index.html` in your browser.
 
-## Run
+Option 2: Use a simple static server (recommended)
 ```bash
-npm install
-npm start
+cd public
+python3 -m http.server 5500
 ```
-Open `http://localhost:3000`.
+Then open `http://localhost:5500`.
+
+## Features
+- Dashboard style UI with logo + loading overlays
+- Chat with new chat, clear chat, show history, media upload
+- Photo/Video maker modules
+- Dedicated Photo Maker page with company info + theme flow
+- Ad/video/caption creator flows
+- Business analytics charts and report download
+- Gallery page for generated outputs
+
+## Storage
+All chat history, profile data, and generated gallery items are saved in browser **localStorage**.

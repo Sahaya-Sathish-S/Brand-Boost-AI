@@ -34,28 +34,20 @@ function v(id){ const el = document.getElementById(id); return el ? el.value : '
 
 document.getElementById('submitBtn').onclick = async () => {
   const details = {
-    companyName: v('companyName'),
-    category: v('category'),
-    productService: v('productService'),
-    offer: v('offer'),
-    address: v('address'),
-    contact: v('contact'),
-    topic: v('topic'),
-    animationType: v('animationType'),
-    videoTone: v('videoTone'),
-    platform: v('platform'),
-    budget: v('budget'),
-    audience: v('audience'),
-    cta: v('cta'),
-    postType: v('postType'),
-    keyword: v('keyword'),
-    aboutTopic: v('aboutTopic')
+    companyName: v('companyName'), category: v('category'), productService: v('productService'), offer: v('offer'),
+    address: v('address'), contact: v('contact'), topic: v('topic'), animationType: v('animationType'),
+    videoTone: v('videoTone'), platform: v('platform'), budget: v('budget'), audience: v('audience'),
+    cta: v('cta'), postType: v('postType'), keyword: v('keyword'), aboutTopic: v('aboutTopic')
   };
 
-  const data = await fetch('/api/generate', {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ type, theme: selectedTheme, details })
-  }).then(r => r.json());
+  const mediaUrl = type === 'video'
+    ? 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
+    : `https://picsum.photos/seed/${Date.now()}/960/540`;
+
+  const title = `${labelMap[type] || 'Creator'} Output`;
+  const text = `Generated ${type} concept for ${details.companyName || 'your brand'} with ${selectedTheme} theme.`;
+
+  addGalleryItem({ type, title, theme: selectedTheme, content: text, media_url: mediaUrl });
 
   const extras = [];
   if (type === 'video') extras.push(`Animation: ${details.animationType || 'Slide Animation'}`, `Tone: ${details.videoTone || 'Professional'}`);
@@ -65,14 +57,13 @@ document.getElementById('submitBtn').onclick = async () => {
   const result = document.getElementById('result');
   result.classList.remove('hidden');
   result.innerHTML = `
-    <h3>${data.title}</h3>
-    <p>${data.text}</p>
-    <p class="small">Theme: ${selectedTheme} ${extras.length ? `| ${extras.join(' | ')}` : ''}</p>
-    ${type === 'video' ? `<video class="media" controls src="${data.mediaUrl}"></video>` : `<img class="media" src="${data.mediaUrl}" alt="generated"/>`}
-    <p class="small">${data.footer}</p>
-    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-      <a class="glow-btn" href="${data.mediaUrl}" download target="_blank" style="max-width:200px">Download</a>
-      <button class="icon-btn" onclick="navigator.share ? navigator.share({title:'BrandBoost AI Output', url:'${data.mediaUrl}'}) : alert('Sharing is not supported in this browser')">🔗</button>
+    <h3>${title}</h3>
+    <p>${text}</p>
+    <p class='small'>Theme: ${selectedTheme} ${extras.length ? `| ${extras.join(' | ')}` : ''}</p>
+    ${type === 'video' ? `<video class='media' controls src='${mediaUrl}'></video>` : `<img class='media' src='${mediaUrl}' alt='generated'/>`}
+    <div style='display:flex; gap:10px; flex-wrap:wrap; margin-top:10px'>
+      <a class='start-btn' href='${mediaUrl}' download target='_blank' style='max-width:200px;text-decoration:none;text-align:center'>Download</a>
+      <button class='icon-btn' onclick="navigator.share ? navigator.share({title:'BrandBoost AI Output', url:'${mediaUrl}'}) : alert('Sharing is not supported')">🔗</button>
     </div>
   `;
 };

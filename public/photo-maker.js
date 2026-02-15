@@ -23,28 +23,24 @@ renderThemes();
 
 function val(id){return document.getElementById(id).value || '';}
 
-document.getElementById('generatePosterBtn').onclick = async () => {
+document.getElementById('generatePosterBtn').onclick = () => {
   const details = {
-    companyName: val('companyName'), category: val('category'), productService: val('product'),
-    offer: val('offer'), address: val('address'), contact: val('contact'), topic: val('brief'),
-    sourceTool: 'Google Images', aiStyle: selectedTheme
+    companyName: val('companyName'), category: val('category'), productService: val('product'), offer: val('offer'),
+    address: val('address'), contact: val('contact'), topic: val('brief')
   };
-
-  const data = await fetch('/api/generate', {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ type: 'photo', theme: selectedTheme, details })
-  }).then(r => r.json());
+  const mediaUrl = `https://picsum.photos/seed/${Date.now()}/960/540`;
+  addGalleryItem({ type: 'photo', title: 'Social Poster Output', theme: selectedTheme, content: details.topic, media_url: mediaUrl });
 
   const out = document.getElementById('posterOutput');
   out.classList.remove('hidden');
   out.innerHTML = `
     <h3>Your Generated Poster</h3>
-    <img class='media' src='${data.mediaUrl}' alt='generated poster'/>
+    <img class='media' src='${mediaUrl}' alt='generated poster'/>
     <p><b>${details.companyName || 'BrandBoost AI'}</b> • ${details.category || 'Business'}</p>
     <p class='small'>Theme: ${selectedTheme} • Social media optimized poster output.</p>
     <div style='display:flex;gap:10px;flex-wrap:wrap;'>
-      <a class='start-btn' style='max-width:220px;text-align:center;text-decoration:none' href='${data.mediaUrl}' download target='_blank'>Download Poster</a>
-      <button class='icon-btn' onclick="navigator.share ? navigator.share({title:'Poster', url:'${data.mediaUrl}'}) : alert('Share not supported')">🔗</button>
+      <a class='start-btn' style='max-width:220px;text-align:center;text-decoration:none' href='${mediaUrl}' download target='_blank'>Download Poster</a>
+      <button class='icon-btn' onclick="navigator.share ? navigator.share({title:'Poster', url:'${mediaUrl}'}) : alert('Share not supported')">🔗</button>
     </div>
   `;
 };
