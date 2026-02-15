@@ -1,0 +1,68 @@
+<!doctype html><html><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>Creator - BrandBoost AI</title><link rel='stylesheet' href='styles.css'/></head>
+<body>
+<div class='loading-overlay' id='loader'><div class='loader-box'><div class='logo'><img src='logo.svg' alt='logo'/></div><h3>Loading Creator...</h3></div></div>
+<div class='app-shell'>
+<aside class='sidebar'>
+  <div class='nav-title'>Navigation</div>
+  <a class='nav-item' href='index.html'><span>💬</span> Chat</a>
+  <a class='nav-item active' href='media.html'><span>🛠️</span> Photo/Video Maker</a>
+  <a class='nav-item' href='analytics.html'><span>📊</span> Business Analytics</a>
+</aside>
+<main class='main'>
+  <div class='topbar'><h2>BrandBoost AI</h2><div class='toolbar'><button class='icon-btn' onclick="location.href='media.html'">⬅</button><button class='icon-btn' onclick="location.href='gallery.html'">🖼️</button></div></div>
+  <div class='content form-page'>
+    <h1 class='welcome-title' id='pageTitle'>Create</h1>
+
+    <div class='card' style='cursor:default'>
+      <h3>Campaign Input</h3>
+      <div class='panel-grid' style='grid-template-columns:1fr 1fr'>
+        <input id='companyName' placeholder='Company Name'/>
+        <input id='category' placeholder='Category'/>
+        <input id='productService' placeholder='Product/Service'/>
+        <input id='offer' placeholder='Offer'/>
+        <input id='address' placeholder='Address'/>
+        <input id='contact' placeholder='Contact'/>
+      </div>
+      <textarea id='topic' rows='3' placeholder='Topic / Campaign brief'></textarea>
+
+      <div id='videoOptions' class='hidden'>
+        <h4>Video Style Settings</h4>
+        <div class='panel-grid' style='grid-template-columns:1fr 1fr'>
+          <select id='animationType'><option>Slide Animation</option><option>Zoom Cut</option><option>Cinematic Motion</option><option>Minimal Smooth</option></select>
+          <select id='videoTone'><option>Professional</option><option>Energetic</option><option>Luxury</option><option>Youth Viral</option></select>
+        </div>
+      </div>
+
+      <div id='adOptions' class='hidden'>
+        <h4>Ad Maker Inputs</h4>
+        <div class='panel-grid' style='grid-template-columns:1fr 1fr'>
+          <input id='platform' placeholder='Ad Platform (Instagram/YouTube/Google)'/>
+          <input id='budget' placeholder='Budget'/>
+          <input id='audience' placeholder='Target audience'/>
+          <input id='cta' placeholder='CTA (Buy now / DM / Call)'/>
+        </div>
+      </div>
+
+      <div id='captionOptions' class='hidden'>
+        <h4>Description + Title Inputs</h4>
+        <div class='panel-grid' style='grid-template-columns:1fr 1fr'>
+          <input id='postType' placeholder='Post Type (Reel, Post, Story, Blog)'/>
+          <input id='keyword' placeholder='Main Keyword'/>
+        </div>
+        <textarea id='aboutTopic' rows='2' placeholder='What is this post/video about?'></textarea>
+      </div>
+
+      <h4>Select Theme / Background</h4>
+      <div class='theme-selector' id='themeSelector'></div>
+      <button class='start-btn' id='submitBtn'>Generate Output</button>
+
+      <div class='result-card hidden' id='result'></div>
+    </div>
+  </div>
+  <div class='footer'>© 2026 Built with ❤️ using Sathish</div>
+</main>
+</div>
+<script>setTimeout(()=>document.getElementById('loader').classList.add('hidden'),700);</script>
+<script src='app-data.js'></script>
+<script src='creator.js'></script>
+</body></html>

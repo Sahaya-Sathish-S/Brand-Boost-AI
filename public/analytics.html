@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset='UTF-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/><title>Business Analytics - BrandBoost AI</title><link rel='stylesheet' href='styles.css'/></head>
+<body>
+<div class='loading-overlay' id='loader'><div class='loader-box'><div class='logo'><img src='logo.svg' alt='logo'/></div><h3>Loading Business Analytics...</h3></div></div>
+<div class='app-shell'>
+<aside class='sidebar'>
+  <div class='nav-title'>Navigation</div>
+  <a class='nav-item' href='index.html'><span>💬</span> Chat</a>
+  <a class='nav-item' href='media.html'><span>🛠️</span> Photo/Video Maker</a>
+  <a class='nav-item active' href='analytics.html'><span>📊</span> Business Analytics</a>
+</aside>
+<main class='main'>
+  <div class='topbar'><h2>BrandBoost AI</h2><div class='toolbar'><button class='icon-btn' onclick="location.href='gallery.html'">🖼️</button></div></div>
+  <div class='content form-page'>
+    <h1 class='welcome-title'>Business Analytics</h1>
+    <div class='small'>Analyze your business performance and make data-driven decisions.</div>
+
+    <div class='chart-grid' style='margin-top:16px'>
+      <div class='card' style='cursor:default;'>
+        <h3>Enter Financial Data</h3>
+        <label>Initial Investment ($)</label><input id='investment' type='number' value='5000'/>
+        <label>Total Revenue ($)</label><input id='revenue' type='number' value='18500'/>
+        <label>Total Costs ($)</label><input id='expenses' type='number' value='9200'/>
+        <label>Growth (%)</label><input id='growth' type='number' value='12'/>
+        <div class='tool-row' style='margin-top:10px'>
+          <button class='start-btn' id='analyzeBtn'>Generate Analytics</button>
+        </div>
+      </div>
+      <div>
+        <div class='card' style='cursor:default;margin-bottom:12px'>
+          <h3>Key Metrics</h3>
+          <div class='kpi-grid' id='kpiGrid'></div>
+        </div>
+        <div class='card' style='cursor:default'>
+          <h3>Download Report</h3>
+          <button class='start-btn' id='downloadBtn'>Download as JSON</button>
+        </div>
+      </div>
+    </div>
+
+    <div class='chart-grid' style='margin-top:14px'>
+      <div class='card' style='cursor:default'><h3>Cost Breakdown</h3><canvas id='pie' width='420' height='300'></canvas></div>
+      <div class='card' style='cursor:default'><h3>Financial Overview</h3><canvas id='bars' width='420' height='300'></canvas></div>
+    </div>
+  </div>
+  <div class='footer'>© 2026 Built with ❤️ using Sathish</div>
+</main>
+</div>
+<script>
+setTimeout(()=>document.getElementById('loader').classList.add('hidden'),700);
+let latest = null;
+function drawPie(data){const c=document.getElementById('pie');const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);const colors=['#7a73e8','#4f9df5','#e98f3d','#ac5bd8'];const total=data.pie.reduce((a,b)=>a+b.value,0);let s=0;data.pie.forEach((x,i)=>{const a=(x.value/total)*Math.PI*2;ctx.beginPath();ctx.moveTo(160,150);ctx.arc(160,150,95,s,s+a);ctx.closePath();ctx.fillStyle=colors[i%4];ctx.fill();s+=a;ctx.fillStyle='#4a5574';ctx.fillText(`${x.label}: ${x.value}%`,300,40+i*25);});}
+function drawBars(data){const c=document.getElementById('bars');const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);const labels=['Investment','Revenue','Costs','Profit'];const vals=[data.investment,data.revenue,data.expenses,data.profit];const max=Math.max(...vals)*1.1;labels.forEach((l,i)=>{const h=(vals[i]/max)*190;const x=36+i*90;const y=240-h;ctx.fillStyle='#5f5bd0';ctx.fillRect(x,y,55,h);ctx.fillStyle='#4a5574';ctx.fillText(l,x-2,258);});}
+function render(d){latest=d;const roi=(((d.revenue-d.expenses)/Math.max(d.investment,1))*100).toFixed(1);document.getElementById('kpiGrid').innerHTML=[['Profit/Loss',`$${d.profit}`],['ROI',`${roi}%`],['Revenue',`$${d.revenue}`],['Costs',`$${d.expenses}`]].map(i=>`<div class='kpi'><div class='small'>${i[0]}</div><h3 style='margin:4px 0 0'>${i[1]}</h3></div>`).join('');drawPie(d);drawBars(d);} 
+function analyze(){const investment=Number(document.getElementById('investment').value||0);const revenue=Number(document.getElementById('revenue').value||0);const expenses=Number(document.getElementById('expenses').value||0);const growth=Number(document.getElementById('growth').value||0);const profit=revenue-expenses;const pie=[{label:'Marketing',value:27},{label:'Operations',value:57},{label:'Other',value:16}];render({investment,revenue,expenses,profit,growth,pie});}
+document.getElementById('analyzeBtn').onclick=analyze;document.getElementById('downloadBtn').onclick=()=>{const b=new Blob([JSON.stringify(latest,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='analytics.json';a.click();};analyze();
+</script>
+</body></html>
